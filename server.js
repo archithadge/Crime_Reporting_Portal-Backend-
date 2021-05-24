@@ -1,14 +1,20 @@
-require('dotenv').config()
+require('dotenv').config();
+var connection=require('./SQL_Connection');
 var express = require('express');
-var mysql = require('mysql');
 
-var con = mysql.createConnection({
-    host: process.env.SQL_HOST,
-    user: process.env.SQL_USERNAME,
-    password: process.env.SQL_PASSWORD
-});
+var app=express();
 
-con.connect(function (err) {
-    if (err) throw err;
-    console.log("Connected!");
-});
+app.get('/',(req,res)=>{
+    connection.query('SELECT * FROM DEMO', function (error, results, fields) {
+        console.log(results);
+        res.json({
+            results
+        })
+    });
+})
+
+app.listen(process.env.PORT,()=>{
+    console.log("Server started at port ",process.env.PORT);
+})
+
+
