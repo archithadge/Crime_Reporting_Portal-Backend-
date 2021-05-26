@@ -1,5 +1,5 @@
 import requests
 
-r = requests.get('http://localhost:8000/',{})
-print(r.json())
+r = requests.post('http://localhost:8000/user/register',json={'name':'s','email':'r','password':'f','address':'d','aadhar':'fd','gender':'fdfd','mobile':'dfd'})
+# print(r.json())
 print('Done')
