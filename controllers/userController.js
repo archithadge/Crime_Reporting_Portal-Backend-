@@ -62,7 +62,7 @@ exports.login = async (req, res) => {
 }
 
 exports.registerComplaint=async (req,res)=>{
-    const aadhar=req.body.aadhar;
+    const aadhar=req.payload;
     const location=req.body.location;
     const type=req.body.type;
     const date=req.body.date;
@@ -76,6 +76,20 @@ exports.registerComplaint=async (req,res)=>{
             console.log("Complaint Registered successfully..!");
             res.json({
                 message:"Complaint Registered successfully..!"
+            })
+        }
+    })
+}
+
+exports.getComplaints=async (req,res)=>{
+    const Aadhar=req.payload;
+    const query=`SELECT * FROM Complaints WHERE Aadhar='${Aadhar}'`;
+    console.log(query);
+    connection.query(query,function(error,results,field){
+        if(!error){
+            // console.log(results);
+            res.json({
+                complaints:results
             })
         }
     })
