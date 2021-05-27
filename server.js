@@ -6,6 +6,7 @@ var app=express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use('/user',require('./routes/user'));
+app.use('/headquarter',require('./routes/headquarter'));
 
 
 var server=app.listen(process.env.PORT,()=>{
